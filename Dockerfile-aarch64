@@ -1,0 +1,9 @@
+FROM debian:buster-slim
+
+RUN apt-get update && apt-get -y install git cmake ninja-build qemu qemu-user qemu-user-static gdb-multiarch 'binfmt*' \
+    gcc-8-aarch64-linux-gnu g++-8-aarch64-linux-gnu
+
+RUN update-alternatives --install /usr/bin/cc cc /usr/bin/aarch64-linux-gnu-gcc-8 100 && \
+    update-alternatives --install /usr/bin/c++ c++ /usr/bin/aarch64-linux-gnu-g++-8 100
+
+ENV QEMU_LD_PREFIX=/usr/aarch64-linux-gnu
